@@ -1,26 +1,29 @@
 # Student Directory Manager
 
+[![Android CI](https://github.com/Rajapakshaminindu/compose-student-directory/actions/workflows/android.yml/badge.svg)](https://github.com/Rajapakshaminindu/compose-student-directory/actions/workflows/android.yml)
+[![Lint & Code Style](https://github.com/Rajapakshaminindu/compose-student-directory/actions/workflows/lint.yml/badge.svg)](https://github.com/Rajapakshaminindu/compose-student-directory/actions/workflows/lint.yml)
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-purple.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
 [![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-2024.02.00-green.svg?style=flat&logo=android)](https://developer.android.com/jetpack/compose)
 [![Material 3](https://img.shields.io/badge/Material%20Design-3-blue.svg?style=flat&logo=materialdesign)](https://m3.material.io)
 [![Firebase Firestore](https://img.shields.io/badge/Firebase-Firestore-orange.svg?style=flat&logo=firebase)](https://firebase.google.com/docs/firestore)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-A modern Android application for managing student records with real-time cloud synchronization using Firebase Firestore. Designed and crafted using Jetpack Compose and Material Design 3 following MVVM architectural best practices.
+A modern, production-ready Android application for managing student profiles and academic records with real-time cloud synchronization using Firebase Firestore. Crafted with Jetpack Compose and Material Design 3 following MVVM architecture and clean code best practices.
 
 ---
 
-## 📸 Overview
+## 📸 Highlights & Features
 
-The **Student Directory Manager** provides a clean, responsive UI to maintain student profiles seamlessly across devices. Any changes made to the database reflect instantly in the app via Firestore snapshots.
-
-### ✨ Highlights
-- **Modern Jetpack Compose UI**: Built with 100% declarative UI and Material You design tokens.
-- **Instant Search & Filter**: Real-time filtering across name, roll number, class/grade, and email.
-- **Dynamic GPA Indicators**: Visual status indicators dynamically styled according to academic performance.
-- **Real-Time Data Sync**: Firebase Firestore snapshot listeners ensure instant synchronization without manual reloads.
-- **Complete CRUD Functionality**: Create, Read, Update, and Delete student profiles with dialog workflows.
-- **Dark & Light Mode**: Comprehensive theming with support for Android 12+ dynamic wallpaper colors.
+- **📱 Modern Jetpack Compose UI**: 100% declarative UI built with Material Design 3 and Edge-to-Edge display support.
+- **🔄 Real-time Firestore Sync**: Automatic instant synchronization across all active devices via Snapshot listeners.
+- **🔍 Instant Search & Filter**: Real-time multi-field search (by Name, Student ID, Grade, Email) and quick Grade FilterChips.
+- **📊 Aggregate Dashboard Card**: Live statistics tracking total enrolled students, average GPA, and honors distinctions.
+- **🏷️ Dynamic GPA Badges**: Color-coded academic indicators (Distinction, Average, At-Risk).
+- **📝 Complete CRUD Operations**: Add, Edit, Delete, and Detailed View dialogs with built-in input validation.
+- **📤 CSV Export**: Export directory records to RFC 4180 compliant CSV format for offline reporting.
+- **🌓 Dynamic Theming**: Complete Dark/Light mode support with Android 12+ wallpaper dynamic colors.
+- **🛡️ Secure Cloud Storage**: Includes Firestore Security Rules for data integrity.
 
 ---
 
@@ -28,9 +31,10 @@ The **Student Directory Manager** provides a clean, responsive UI to maintain st
 
 - **Language**: [Kotlin](https://kotlinlang.org/)
 - **UI Framework**: [Jetpack Compose](https://developer.android.com/jetpack/compose) (Material 3)
-- **Architecture**: MVVM (Model - View - ViewModel) + unidirectional data flow (UDF)
-- **Reactive State**: Kotlin Coroutines & `StateFlow`
-- **Backend / Cloud**: [Firebase Firestore](https://firebase.google.com/docs/firestore)
+- **Architecture**: MVVM (Model - View - ViewModel) with Repository Pattern (see [ARCHITECTURE.md](ARCHITECTURE.md))
+- **Asynchronous & Reactive**: Kotlin Coroutines & `StateFlow`
+- **Backend / Database**: [Google Cloud Firebase Firestore](https://firebase.google.com/docs/firestore)
+- **Continuous Integration**: GitHub Actions CI for automated builds, unit tests, and lint checks
 - **Minimum SDK**: 24 (Android 7.0 Nougat)
 - **Target SDK**: 34 (Android 14)
 
@@ -40,28 +44,48 @@ The **Student Directory Manager** provides a clean, responsive UI to maintain st
 
 ```
 compose-student-directory/
+├── .github/
+│   ├── workflows/
+│   │   ├── android.yml              # CI automated build & test pipeline
+│   │   └── lint.yml                 # Code quality & linting checks
+│   ├── ISSUE_TEMPLATE/              # Bug report and Feature request templates
+│   └── pull_request_template.md     # Standard PR checklist
 ├── app/
 │   ├── src/
 │   │   ├── main/
+│   │   │   ├── assets/sample_students.json          # Mock dataset for offline testing
 │   │   │   ├── java/com/example/activity_03/
 │   │   │   │   ├── MainActivity.kt                  # Activity entry point with Edge-to-Edge
 │   │   │   │   ├── model/
-│   │   │   │   │   └── Student.kt                   # Firestore entity & mapper functions
+│   │   │   │   │   ├── Student.kt                   # Student entity with Firestore mappings
+│   │   │   │   │   └── AcademicRecord.kt            # Course grades & attendance models
+│   │   │   │   ├── repository/
+│   │   │   │   │   └── StudentRepository.kt         # Clean architecture repository layer
 │   │   │   │   ├── viewmodel/
-│   │   │   │   │   └── StudentViewModel.kt          # Business logic & StateFlow streams
-│   │   │   │   └── ui/
-│   │   │   │       ├── StudentDirectoryScreen.kt    # Main directory UI, cards & dialogs
-│   │   │   │       └── theme/
-│   │   │   │           ├── Theme.kt                 # Material 3 dark/light/dynamic color schemes
-│   │   │   │           └── Type.kt                  # Material 3 typography definitions
+│   │   │   │   │   └── StudentViewModel.kt          # Business logic & reactive state
+│   │   │   │   ├── ui/
+│   │   │   │   │   ├── StudentDirectoryScreen.kt    # Root directory UI screen
+│   │   │   │   │   ├── components/                  # Reusable UI components
+│   │   │   │   │   │   ├── StatisticsCard.kt        # Aggregate metrics card
+│   │   │   │   │   │   ├── StudentDetailDialog.kt   # Detailed profile viewer
+│   │   │   │   │   │   ├── FilterChipRow.kt         # Grade category filter row
+│   │   │   │   │   │   └── SortDropdown.kt          # Sorting options menu
+│   │   │   │   │   └── theme/                       # M3 Color scheme & Typography
+│   │   │   │   └── util/
+│   │   │   │       ├── Validators.kt                # Input validation engine
+│   │   │   │       └── CsvExportUtil.kt             # CSV export utility
 │   │   │   └── AndroidManifest.xml
-│   │   └── test/
+│   │   └── test/                                    # Unit test suite
 │   │       └── java/com/example/activity_03/
-│   │           └── model/
-│   │               └── StudentTest.kt               # Unit tests for data serialization & logic
-│   └── build.gradle.kts                             # Module configuration & dependencies
-├── build.gradle.kts                                 # Project build configuration
-├── settings.gradle.kts                              # Gradle repository & module inclusion
+│   │           ├── model/StudentTest.kt
+│   │           ├── model/AcademicRecordTest.kt
+│   │           └── util/ValidatorsTest.kt
+│   └── build.gradle.kts
+├── firestore.rules                                  # Cloud Firestore security & validation rules
+├── ARCHITECTURE.md                                  # Architectural documentation & flowcharts
+├── CONTRIBUTING.md                                  # Contribution guidelines
+├── CODE_OF_CONDUCT.md                               # Contributor Code of Conduct
+├── LICENSE                                          # MIT License
 └── README.md
 ```
 
@@ -76,7 +100,7 @@ compose-student-directory/
 - Android SDK 24+
 - A Google Firebase account with Cloud Firestore enabled
 
-### Setup Steps
+### Setup Instructions
 
 1. **Clone the repository**
    ```bash
@@ -86,33 +110,21 @@ compose-student-directory/
 
 2. **Add Firebase Credentials**
    - Head over to the [Firebase Console](https://console.firebase.google.com/) and create a project.
-   - Register an Android app using the package name `com.example.activity_03`.
+   - Register an Android app using package: `com.example.activity_03`.
    - Download `google-services.json` and place it in the `app/` directory:
      ```
      app/google-services.json
      ```
-   - In Firestore Database, create a collection named `students` or let the app automatically initialize it on first entry.
+   - In Firestore Database, create a collection named `students` or use [firestore.rules](firestore.rules) to configure security rules.
 
-3. **Configure Firestore Rules (Development Mode)**
-   ```javascript
-   rules_version = '2';
-   service cloud.firestore {
-     match /databases/{database}/documents {
-       match /students/{studentId} {
-         allow read, write: if true;
-       }
-     }
-   }
-   ```
-
-4. **Build & Run**
-   Open the project in Android Studio, sync Gradle, and run on an emulator or physical device.
+3. **Build & Run**
+   Open the project in Android Studio, allow Gradle to sync dependencies, and hit **Run**.
 
 ---
 
 ## 🧪 Testing
 
-Run the included local unit tests via Gradle:
+Execute the automated unit test suite using Gradle:
 ```bash
 ./gradlew test
 ```
@@ -121,15 +133,13 @@ Run the included local unit tests via Gradle:
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome!
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Contributions, issues, and feature suggestions are welcome! Please check our:
+- [Contributing Guidelines](CONTRIBUTING.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Architecture Guide](ARCHITECTURE.md)
 
 ---
 
 ## 📄 License
 
-This project is open-source and distributed under the [MIT License](LICENSE).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
