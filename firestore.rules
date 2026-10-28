@@ -1,0 +1,35 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions for validating student data
+    function isValidStudent(data) {
+      return data.name is string && data.name.size() > 0 &&
+             data.gpa is number && data.gpa >= 0.0 && data.gpa <= 4.0;
+    }
+
+    // Rules for 'students' collection
+    match /students/{studentId} {
+      // Anyone can read during development or authenticated in production
+      allow read: if true;
+
+      // Validate on create/update
+      allow create: if isValidStudent(request.resource.data);
+      allow update: if isValidStudent(request.resource.data);
+
+      // Allow deletion
+      allow delete: if true;
+    }
+
+    // Rules for academic records
+    match /academic_records/{recordId} {
+      allow read, write: if true;
+    }
+
+    // Rules for attendance logs
+    match /attendance/{attendanceId} {
+      allow read, write: if true;
+    }
+  }
+}
