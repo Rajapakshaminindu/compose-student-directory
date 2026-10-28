@@ -1,161 +1,135 @@
 # Student Directory Manager
 
-A modern Android application for managing student information with real-time synchronization using Firebase Firestore. Built with Jetpack Compose and Material Design 3.
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-purple.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
+[![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-2024.02.00-green.svg?style=flat&logo=android)](https://developer.android.com/jetpack/compose)
+[![Material 3](https://img.shields.io/badge/Material%20Design-3-blue.svg?style=flat&logo=materialdesign)](https://m3.material.io)
+[![Firebase Firestore](https://img.shields.io/badge/Firebase-Firestore-orange.svg?style=flat&logo=firebase)](https://firebase.google.com/docs/firestore)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
-
-- **📱 Modern UI**: Built with Jetpack Compose and Material Design 3
-- **🔄 Real-time Sync**: Firebase Firestore integration for instant data synchronization
-- **➕ Add Students**: Create new student records with a user-friendly dialog
-- **✏️ Edit Students**: Update existing student information seamlessly
-- **🗑️ Delete Students**: Remove student records from the database
-- **👁️ View Students**: Browse all students in a clean, scrollable list
-- **🔐 Cloud Backend**: Secure data storage with Firebase
-
-## Tech Stack
-
-- **Language**: Kotlin
-- **UI Framework**: Jetpack Compose
-- **Architecture**: MVVM (Model-View-ViewModel)
-- **Backend**: Firebase Firestore
-- **Minimum SDK**: 24
-- **Target SDK**: 37
-- **Build System**: Gradle (Kotlin DSL)
-
-## Project Structure
-
-```
-Activity_03/
-├── app/
-│   ├── src/
-│   │   └── main/
-│   │       ├── java/com/example/activity_03/
-│   │       │   ├── MainActivity.kt          # Main activity with UI
-│   │       │   ├── model/
-│   │       │   │   └── Student.kt           # Data model
-│   │       │   ├── viewmodel/
-│   │       │   │   └── StudentViewModel.kt  # Business logic
-│   │       │   └── ui/
-│   │       ├── AndroidManifest.xml
-│   │       └── res/
-│   ├── build.gradle.kts                     # App dependencies
-│   └── google-services.json                 # Firebase configuration
-├── viewmodel/
-│   └── StudentViewModel.kt
-├── build.gradle.kts
-├── settings.gradle.kts
-└── gradle/
-
-```
-
-## Getting Started
-
-### Prerequisites
-
-- Android Studio (latest version recommended)
-- Android SDK 24 or higher
-- Firebase account with Firestore enabled
-- Kotlin 1.8 or higher
-
-### Setup Instructions
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd Activity_03
-   ```
-
-2. **Configure Firebase**
-   - Download your `google-services.json` file from Firebase Console
-   - Place it in the `app/` directory
-   - Ensure Firestore database is created and accessible
-
-3. **Build and Run**
-   ```bash
-   ./gradlew build
-   ./gradlew installDebug
-   ```
-   Or use Android Studio's Run button
-
-4. **Firebase Firestore Setup**
-   - Create a collection named `students` in your Firestore database
-   - Set appropriate security rules for read/write access
-
-## Usage
-
-1. **Launch the app** on your Android device or emulator
-2. **View Students**: The main screen displays all students from Firestore
-3. **Add a Student**: Tap the floating action button (+) to add a new student
-4. **Edit a Student**: Tap the edit icon next to a student's entry
-5. **Delete a Student**: Tap the delete icon to remove a student
-
-## Key Components
-
-### StudentViewModel
-Manages all business logic for student operations:
-- Real-time listener for Firestore changes
-- CRUD operations (Create, Read, Update, Delete)
-- StateFlow for reactive UI updates
-
-### Student Model
-Data class representing a student entity with Firestore serialization
-
-### UI Screens
-- **StudentDirectoryScreen**: Main screen with student list and action buttons
-- **Add/Edit Dialog**: Modal for creating or updating student information
-
-## Dependencies
-
-- **Jetpack Compose**: UI framework
-- **Firebase Firestore**: Real-time database
-- **Kotlin Coroutines**: Asynchronous programming
-- **Lifecycle**: ViewModel and state management
-- **Material Icons**: Icon library
-
-## API Reference
-
-### StudentViewModel Methods
-
-```kotlin
-fun addStudent(student: Student)           // Add a new student
-fun updateStudent(student: Student)        // Update existing student
-fun deleteStudent(studentId: String)       // Delete a student
-```
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit pull requests or open issues for bugs and feature requests.
-
-## Future Enhancements
-
-- [ ] Student search functionality
-- [ ] Student filtering by class/grade
-- [ ] Export student data to CSV
-- [ ] Student profile pictures
-- [ ] Offline sync capability
-- [ ] Student attendance tracking
-- [ ] Grade management system
-
-## License
-
-This project is open source and available under the MIT License.
-
-## Contact
-
-For questions or suggestions, please reach out or open an issue in the repository.
+A modern Android application for managing student records with real-time cloud synchronization using Firebase Firestore. Designed and crafted using Jetpack Compose and Material Design 3 following MVVM architectural best practices.
 
 ---
 
-**Repository Suggestions:**
+## 📸 Overview
 
-### Option 1 (Recommended):
-- **Name**: `StudentDirectoryApp`
-- **Description**: A modern Android app for managing student information with real-time Firebase Firestore sync, built with Jetpack Compose and Material Design 3.
+The **Student Directory Manager** provides a clean, responsive UI to maintain student profiles seamlessly across devices. Any changes made to the database reflect instantly in the app via Firestore snapshots.
 
-### Option 2:
-- **Name**: `StudentManager`
-- **Description**: Real-time student management application with Firebase backend, featuring modern Android UI built with Jetpack Compose.
+### ✨ Highlights
+- **Modern Jetpack Compose UI**: Built with 100% declarative UI and Material You design tokens.
+- **Instant Search & Filter**: Real-time filtering across name, roll number, class/grade, and email.
+- **Dynamic GPA Indicators**: Visual status indicators dynamically styled according to academic performance.
+- **Real-Time Data Sync**: Firebase Firestore snapshot listeners ensure instant synchronization without manual reloads.
+- **Complete CRUD Functionality**: Create, Read, Update, and Delete student profiles with dialog workflows.
+- **Dark & Light Mode**: Comprehensive theming with support for Android 12+ dynamic wallpaper colors.
 
-### Option 3:
-- **Name**: `compose-student-directory`
-- **Description**: Android student directory application showcasing Jetpack Compose, Firebase Firestore integration, and MVVM architecture patterns.
+---
+
+## 🛠 Tech Stack & Architecture
+
+- **Language**: [Kotlin](https://kotlinlang.org/)
+- **UI Framework**: [Jetpack Compose](https://developer.android.com/jetpack/compose) (Material 3)
+- **Architecture**: MVVM (Model - View - ViewModel) + unidirectional data flow (UDF)
+- **Reactive State**: Kotlin Coroutines & `StateFlow`
+- **Backend / Cloud**: [Firebase Firestore](https://firebase.google.com/docs/firestore)
+- **Minimum SDK**: 24 (Android 7.0 Nougat)
+- **Target SDK**: 34 (Android 14)
+
+---
+
+## 📁 Project Structure
+
+```
+compose-student-directory/
+├── app/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/com/example/activity_03/
+│   │   │   │   ├── MainActivity.kt                  # Activity entry point with Edge-to-Edge
+│   │   │   │   ├── model/
+│   │   │   │   │   └── Student.kt                   # Firestore entity & mapper functions
+│   │   │   │   ├── viewmodel/
+│   │   │   │   │   └── StudentViewModel.kt          # Business logic & StateFlow streams
+│   │   │   │   └── ui/
+│   │   │   │       ├── StudentDirectoryScreen.kt    # Main directory UI, cards & dialogs
+│   │   │   │       └── theme/
+│   │   │   │           ├── Theme.kt                 # Material 3 dark/light/dynamic color schemes
+│   │   │   │           └── Type.kt                  # Material 3 typography definitions
+│   │   │   └── AndroidManifest.xml
+│   │   └── test/
+│   │       └── java/com/example/activity_03/
+│   │           └── model/
+│   │               └── StudentTest.kt               # Unit tests for data serialization & logic
+│   └── build.gradle.kts                             # Module configuration & dependencies
+├── build.gradle.kts                                 # Project build configuration
+├── settings.gradle.kts                              # Gradle repository & module inclusion
+└── README.md
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Android Studio Hedgehog](https://developer.android.com/studio) or newer
+- JDK 17
+- Android SDK 24+
+- A Google Firebase account with Cloud Firestore enabled
+
+### Setup Steps
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Rajapakshaminindu/compose-student-directory.git
+   cd compose-student-directory
+   ```
+
+2. **Add Firebase Credentials**
+   - Head over to the [Firebase Console](https://console.firebase.google.com/) and create a project.
+   - Register an Android app using the package name `com.example.activity_03`.
+   - Download `google-services.json` and place it in the `app/` directory:
+     ```
+     app/google-services.json
+     ```
+   - In Firestore Database, create a collection named `students` or let the app automatically initialize it on first entry.
+
+3. **Configure Firestore Rules (Development Mode)**
+   ```javascript
+   rules_version = '2';
+   service cloud.firestore {
+     match /databases/{database}/documents {
+       match /students/{studentId} {
+         allow read, write: if true;
+       }
+     }
+   }
+   ```
+
+4. **Build & Run**
+   Open the project in Android Studio, sync Gradle, and run on an emulator or physical device.
+
+---
+
+## 🧪 Testing
+
+Run the included local unit tests via Gradle:
+```bash
+./gradlew test
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is open-source and distributed under the [MIT License](LICENSE).
