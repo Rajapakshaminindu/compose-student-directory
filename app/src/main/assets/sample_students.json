@@ -1,0 +1,62 @@
+[
+  {
+    "id": "std_101",
+    "name": "Alex Johnson",
+    "studentId": "CS-2026-001",
+    "email": "alex.johnson@university.edu",
+    "phone": "+1 555-0199",
+    "grade": "Senior",
+    "gpa": 3.92,
+    "address": "402 Orchard Way, Suite 12",
+    "createdAt": 1704067200000,
+    "updatedAt": 1704067200000
+  },
+  {
+    "id": "std_102",
+    "name": "Maria Garcia",
+    "studentId": "EE-2026-042",
+    "email": "maria.garcia@university.edu",
+    "phone": "+1 555-0245",
+    "grade": "Junior",
+    "gpa": 3.78,
+    "address": "812 Pine Ridge Blvd",
+    "createdAt": 1704153600000,
+    "updatedAt": 1704153600000
+  },
+  {
+    "id": "std_103",
+    "name": "Liam Smith",
+    "studentId": "ME-2026-115",
+    "email": "liam.smith@university.edu",
+    "phone": "+1 555-0378",
+    "grade": "Sophomore",
+    "gpa": 2.85,
+    "address": "205 Oak Terrace Apt 4",
+    "createdAt": 1704240000000,
+    "updatedAt": 1704240000000
+  },
+  {
+    "id": "std_104",
+    "name": "Chloe Chen",
+    "studentId": "CS-2026-089",
+    "email": "chloe.chen@university.edu",
+    "phone": "+1 555-0412",
+    "grade": "Senior",
+    "gpa": 4.00,
+    "address": "77 Beacon St",
+    "createdAt": 1704326400000,
+    "updatedAt": 1704326400000
+  },
+  {
+    "id": "std_105",
+    "name": "Ethan Davis",
+    "studentId": "BIO-2026-033",
+    "email": "ethan.davis@university.edu",
+    "phone": "+1 555-0567",
+    "grade": "Freshman",
+    "gpa": 3.40,
+    "address": "15 Maple Lane",
+    "createdAt": 1704412800000,
+    "updatedAt": 1704412800000
+  }
+]
