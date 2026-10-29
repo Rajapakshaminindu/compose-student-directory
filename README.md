@@ -120,16 +120,9 @@ compose-student-directory/
 3. **Build & Run**
    Open the project in Android Studio, allow Gradle to sync dependencies, and hit **Run**.
 
----
 
-## 🧪 Testing
 
-Execute the automated unit test suite using Gradle:
-```bash
-./gradlew test
-```
 
----
 
 ## 🤝 Contributing
 
